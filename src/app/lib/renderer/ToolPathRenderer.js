@@ -55,6 +55,7 @@ class ToolPathRenderer {
             obj = this.parseToLine(data, isRotate);
         }
         obj.position.set(isRotate ? 0 : this.toolPath.positionX, this.toolPath.positionY, 0);
+        console.log('this.toolPath.rotationB', isRotate, this.toolPath.rotationB);
         if (this.toolPath.rotationB) {
             obj.rotation.y = this.toolPath.rotationB / 180 * Math.PI;
         }

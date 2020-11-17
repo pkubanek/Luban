@@ -430,7 +430,7 @@ export const actions = {
             config: {
                 ...selectedModel.config
             },
-            isRotate: materials.isRotate
+            materials: materials
         };
 
         api.processImage(options)
