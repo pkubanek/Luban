@@ -215,8 +215,6 @@ const defaultGcodeConfigs = {
 
     // Cnc
     [toKey(HEAD_CNC, PROCESS_MODE_GREYSCALE)]: {
-        toolDiameter: 3.175, // tool diameter (in mm)
-        toolAngle: 30, // tool angle (in degree, defaults to 30° for V-Bit)
         targetDepth: 2.0,
         stepDown: 0.5,
         safetyHeight: 1.0,
@@ -229,9 +227,6 @@ const defaultGcodeConfigs = {
     },
     [toKey(HEAD_CNC, PROCESS_MODE_GREYSCALE, SOURCE_TYPE_IMAGE3D)]: {
         sliceMode: CNC_MESH_SLICE_MODE_ROTATION,
-        toolDiameter: 0.1, // tool diameter (in mm)
-        toolAngle: 30, // tool angle (in degree, defaults to 30° for V-Bit)
-        toolShaftDiameter: 3.175,
         targetDepth: 2.0,
         stepDown: 0.5,
         safetyHeight: 1.0,
@@ -244,9 +239,6 @@ const defaultGcodeConfigs = {
         isModel: true
     },
     [toKey(HEAD_CNC)]: {
-        toolDiameter: 0.1, // tool diameter (in mm)
-        toolAngle: 30, // tool angle (in degree, defaults to 30° for V-Bit)
-        toolShaftDiameter: 3.175, // tool angle (in degree, defaults to 30° for V-Bit)
         optimizePath: false,
         fillEnabled: DEFAULT_FILL_ENABLED,
         fillDensity: DEFAULT_FILL_DENSITY,

@@ -13,6 +13,7 @@ const CNC_LASER_VERT_SHADER = [
     'void main(){',
     '    v_g_code = a_g_code;',
     '    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);',
+    '    gl_PointSize = 1.0;',
     '}'
 ].join('');
 

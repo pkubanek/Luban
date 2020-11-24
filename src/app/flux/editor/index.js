@@ -175,7 +175,7 @@ export const actions = {
 
     generateModel: (headType, originalName, uploadName, sourceWidth, sourceHeight, mode, sourceType, config, gcodeConfig, transformation) => (dispatch, getState) => {
         const { size } = getState().machine;
-        const { materials, toolParams, modelGroup, SVGActions } = getState()[headType];
+        const { materials, modelGroup, SVGActions } = getState()[headType];
 
         sourceType = sourceType || getSourceType(originalName);
 
@@ -191,14 +191,7 @@ export const actions = {
         }
 
         const defaultConfig = modelDefaultConfigs.config;
-        const defaultGcodeConfig = headType === 'cnc'
-            ? {
-                ...modelDefaultConfigs.gcodeConfig,
-                toolDiameter: toolParams.toolDiameter,
-                toolAngle: toolParams.toolAngle,
-                toolShaftDiameter: toolParams.toolShaftDiameter
-            }
-            : modelDefaultConfigs.gcodeConfig;
+        const defaultGcodeConfig = modelDefaultConfigs.gcodeConfig;
         // cnc size limit
         if (`${headType}-${sourceType}-${mode}` === 'cnc-raster-greyscale') {
             width = 40;
@@ -333,16 +326,7 @@ export const actions = {
         modelGroup.updateSelectedMode(mode, config);
 
         // Set or replace G-code config of new mode
-        let { gcodeConfig } = modelDefaultConfigs;
-        if (headType === 'cnc') {
-            const { toolDiameter, toolAngle, toolShaftDiameter } = getState().cnc.toolParams;
-            gcodeConfig = {
-                ...gcodeConfig,
-                toolDiameter,
-                toolAngle,
-                toolShaftDiameter
-            };
-        }
+        const { gcodeConfig } = modelDefaultConfigs;
         const toolPathModelState = toolPathModelGroup.updateSelectedMode(mode, gcodeConfig);
         dispatch(baseActions.updateState(headType, {
             // ...modelState,
@@ -412,7 +396,7 @@ export const actions = {
 
     // TODO: temporary workaround for model image processing
     processSelectedModel: (headType) => (dispatch, getState) => {
-        const { materials, modelGroup } = getState()[headType];
+        const { materials, modelGroup, toolParams = {} } = getState()[headType];
 
         const selectedModels = modelGroup.getSelectedModelArray();
         if (selectedModels.length !== 1) {
@@ -439,7 +423,8 @@ export const actions = {
             config: {
                 ...selectedModel.config
             },
-            materials: materials
+            materials: materials,
+            toolParams: toolParams
         };
         dispatch(baseActions.updateState(headType, {
             stage: CNC_LASER_STAGE.PROCESSING_IMAGE,
@@ -808,11 +793,11 @@ export const actions = {
     manualPreview: (headType, isProcess) => async (dispatch, getState) => {
         const { modelGroup, toolPathModelGroup, autoPreviewEnabled } = getState()[headType];
 
-        const { materials } = getState()[headType];
+        const { materials, toolParams = {} } = getState()[headType];
 
         if (isProcess || autoPreviewEnabled) {
             for (const model of modelGroup.getModels()) {
-                await model.preview({ materials });
+                await model.preview({ materials, toolParams });
             }
 
             const isAllModelsPreviewed = checkIsAllModelsPreviewed(modelGroup, toolPathModelGroup);
