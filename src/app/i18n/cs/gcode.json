@@ -1,5 +1,5 @@
 {
-    "Rapid Move (G0)": "Rapidní Posuv (G0)",
+    "Rapid Move (G0)": "Rychlý Posuv (G0)",
     "Linear Move (G1)": "Linearní Posuv (G1)",
     "Inches (G20)": "Palce (G20)",
     "Millimeters (G21)": "Milimetry (G21)",
@@ -7,9 +7,9 @@
     "Relative (G91)": "Relativní (G91)",
     "Inverse Time (G93)": "Invertovat Čas (G93)",
     "Units/Min (G94)": "Jednotky/Min (G94)",
-    "Spindle On, CW (M3)": "",
-    "Spindle On, CCW (M4)": "",
-    "Spindle Off (M5)": "",
-    "Power On (M3)": "",
-    "Power Off (M5)": ""
+    "Spindle On, CW (M3)": "Hřídel po směru hodinových ručiček (M3)",
+    "Spindle On, CCW (M4)": "Hřídel proti směru hodinových ručiček (M4)",
+    "Spindle Off (M5)": "Vypnout hřídel (M5)",
+    "Power On (M3)": "Zapnout (M3)",
+    "Power Off (M5)": "Vypnout (M5)"
 }

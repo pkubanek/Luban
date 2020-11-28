@@ -33,6 +33,7 @@ const settings = {
 
         whitelist: [
             'en', // English (default)
+            'cs', // Czech
             'de', // German
             'es', // Spanish
             'fr', // French
